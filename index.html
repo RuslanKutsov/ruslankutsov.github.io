@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тренажёры по математике</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232745d6'/%3E%3Cpath d='M12 50H54M20 54V12' stroke='%23fff' stroke-width='3.4' fill='none' stroke-linecap='round'/%3E%3Cpath d='M16 20C26 62 44 54 54 18' stroke='%23ff8a7a' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&display=swap">
+<style>
+:root {
+  --page: #eef1f7; --paper: #fbfcfe; --soft: #e7ecf6; --ink: #18223a; --muted: #5a6685; --rule: #d3d9e8;
+  --grid: rgba(39, 69, 214, .075); --accent: #2745d6; --accent-soft: #dfe6ff;
+  --font-ui: 'Golos Text', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --page: #0e1220; --paper: #151b2d; --soft: #1d2540; --ink: #e5e9f6; --muted: #9ba7c6; --rule: #2a3352; --grid: rgba(123, 147, 255, .09); --accent: #8197ff; --accent-soft: #263268; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --page: #0e1220; --paper: #151b2d; --soft: #1d2540; --ink: #e5e9f6; --muted: #9ba7c6; --rule: #2a3352; --grid: rgba(123, 147, 255, .09); --accent: #8197ff; --accent-soft: #263268; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--font-ui); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 28px max(16px, env(safe-area-inset-right, 0px)) 48px max(16px, env(safe-area-inset-left, 0px)); display: grid; gap: 22px; }
+.top { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.eyebrow { margin: 0; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { margin: 2px 0 0; font-size: clamp(26px, 5vw, 38px); line-height: 1.15; font-weight: 600; letter-spacing: -.01em; text-wrap: balance; }
+.lead { margin: 8px 0 0; color: var(--muted); max-width: 60ch; text-wrap: pretty; }
+.langsw { display: inline-flex; border: 1px solid var(--rule); border-radius: 999px; overflow: hidden; background: var(--paper); }
+.langsw button { border: 0; background: none; padding: 6px 12px; font: inherit; font-size: 13px; font-weight: 600; letter-spacing: .04em; color: var(--muted); cursor: pointer; }
+.langsw button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.card { display: grid; grid-template-rows: auto 1fr; gap: 12px; background: var(--paper); border: 1px solid var(--rule); border-radius: 14px; padding: 18px; color: inherit; text-decoration: none; transition: transform .15s, box-shadow .15s, border-color .15s; }
+.card:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 8px 24px rgba(24, 34, 58, .1); }
+.card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.ico { width: 64px; height: 64px; }
+.card h2 { margin: 0; font-size: 19px; font-weight: 600; line-height: 1.25; }
+.card p { margin: 6px 0 0; color: var(--muted); font-size: 14.5px; text-wrap: pretty; }
+.sect { margin: 6px 0 -6px; font-size: 20px; font-weight: 600; letter-spacing: -.005em; }
+.open { color: var(--accent); font-weight: 600; font-size: 14px; }
+.contacts { text-align: center; color: var(--muted); font-size: 14px; padding-top: 8px; }
+.contacts p { margin: 0; }
+.cname { color: var(--ink); font-weight: 600; margin-bottom: 4px !important; }
+.clinks { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 18px; }
+.clinks a { color: var(--accent); text-decoration: none; }
+.clinks a:hover { text-decoration: underline; }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="eyebrow" data-i18n="eyebrow">Математика и физика</p>
+      <h1 data-i18n="h1">Тренажёры и подготовка к экзаменам</h1>
+      <p class="lead" data-i18n="lead">Интерактивные тренажёры по математике и сайты с задачами для подготовки к ОГЭ и ЕГЭ.</p>
+    </div>
+    <div class="langsw" role="group" aria-label="Language"><button type="button" id="lang-ru" aria-pressed="true">RU</button><button type="button" id="lang-en" aria-pressed="false">EN</button></div>
+  </header>
+
+  <h2 class="sect" data-i18n="h_tr">Тренажёры</h2>
+  <main class="grid" id="grid"></main>
+
+  <h2 class="sect" data-i18n="h_ex">Подготовка к экзаменам</h2>
+  <section class="grid" id="grid2"></section>
+
+  <footer class="contacts">
+    <p class="cname" data-i18n="c_name">Руслан Владимирович Куцов</p>
+    <p class="clinks">
+      <a href="https://t.me/Ruslan_Phys_Math" target="_blank" rel="noopener noreferrer">Telegram</a>
+      <a href="https://wa.me/79081307537" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a href="https://vk.ru/ruslan_phys_math" target="_blank" rel="noopener noreferrer" data-i18n="c_vk">ВКонтакте</a>
+      <a href="https://profi.ru/profile/KutsovRV/" target="_blank" rel="noopener noreferrer" data-i18n="c_profi">Профи.ру</a>
+    </p>
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   СПИСОК ТРЕНАЖЁРОВ. Чтобы добавить новый — скопируйте любой блок { ... },
+   вставьте в конец списка и поменяйте: href (адрес тренажёра), иконку, тексты ru и en.
+   ============================================================ */
+const TRAINERS = [
+  {
+    href: 'https://ruslankutsov.github.io/sections/',
+    icon: `<rect x="1.5" y="1.5" width="61" height="61" rx="13" fill="#fbfcfe" stroke="#d3d9e8" stroke-width="2"/><g fill="none" stroke="#1b2a55" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 56 24 42M24 42V10M24 42H56" stroke-dasharray="3.4 4.6" stroke-width="2.4"/><path d="M8 24H40V56H8ZM8 24 24 10H56L40 24M56 10V42L40 56"/></g><polygon points="8,46 40,38 56,26 24,34" fill="#2b9a63" fill-opacity=".32"/><g fill="none" stroke="#2b9a63" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 46 40 38 56 26"/><path d="M56 26 24 34 8 46" stroke-dasharray="3.2 3.6" stroke-width="2.4"/></g><g fill="#1b2a55" stroke="#fbfcfe" stroke-width="1.4"><circle cx="8" cy="46" r="3.6"/><circle cx="40" cy="38" r="3.6"/><circle cx="56" cy="26" r="3.6"/></g>`,
+    ru: { title: 'Сечения многогранников', text: 'Постройте сечение параллелепипеда, призмы или пирамиды по трём точкам методом следов. Подсказки, поворот фигуры, сохранение построения в PDF.' },
+    en: { title: 'Polyhedron cross-sections', text: 'Construct the cross-section of a cuboid, prism or pyramid through three points by the method of traces. Hints, rotation, saving to PDF.' }
+  },
+  {
+    href: 'https://ruslankutsov.github.io/graph/',
+    icon: `<rect x="1.5" y="1.5" width="61" height="61" rx="13" fill="#fbfcfe" stroke="#d3d9e8" stroke-width="2"/><g stroke="#d3d9e8" stroke-width="1"><path d="M16 8V56M32 8V56M48 8V56M8 16H56M8 32H56M8 48H56"/></g><g fill="none" stroke="#1b2a55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 40H56M24 56V8"/><path d="M50 12 46 8M18 14l6-6 6 6" stroke-width="0"/></g><path d="M8 14C20 56 40 56 56 14" fill="none" stroke="#c9302c" stroke-width="3.4" stroke-linecap="round" transform="translate(0 -6) scale(1 .9)"/><g fill="#1b2a55" stroke="#fbfcfe" stroke-width="1.4"><circle cx="32" cy="46" r="3.6"/><circle cx="18" cy="31" r="3.6"/><circle cx="46" cy="31" r="3.6"/></g>`,
+    ru: { title: 'Построение графиков функций', text: 'Постройте графики, двигая шаблон за ключевые точки, и проверяйте себя. Интерактивные подсказки и сохранение построения в PDF.' },
+    en: { title: 'Graphing functions', text: 'Build graphs by moving the template by its key points, and check yourself. Interactive hints and saving the construction to PDF.' }
+  },
+  {
+    href: 'https://ruslankutsov.github.io/vectors/',
+    icon: `<rect x="1.5" y="1.5" width="61" height="61" rx="13" fill="#fbfcfe" stroke="#d3d9e8" stroke-width="2"/><g stroke="#d3d9e8" stroke-width="1"><path d="M16 8V56M32 8V56M48 8V56M8 16H56M8 32H56M8 48H56"/></g><g fill="none" stroke="#1b2a55" stroke-width="2.4" stroke-linecap="round"><path d="M8 50H56M14 56V8"/></g><g stroke-linecap="round" stroke-linejoin="round"><path d="M16 48 38 22" stroke="#0f7b7b" stroke-width="3.4" fill="none"/><path d="M42 17 32 21 38 27Z" fill="#0f7b7b" stroke="#0f7b7b"/><path d="M38 22 54 34" stroke="#e0561b" stroke-width="3.4" fill="none"/><path d="M58 37 47 35 52 28Z" fill="#e0561b" stroke="#e0561b"/><path d="M16 48 54 34" stroke="#c9302c" stroke-width="3.4" fill="none" stroke-dasharray="1 0"/></g>`,
+    ru: { title: 'Действия с векторами', text: 'Проекции и модуль, сумма и разность, умножение на число, скалярное произведение и косинус угла. Построения на плоскости, подсказки, сохранение в PDF.' },
+    en: { title: 'Vector operations', text: 'Components and magnitude, sum and difference, scalar multiplication, dot product and angle cosine. Constructions on the plane, hints, saving to PDF.' }
+  }
+];
+
+/* ============================================================
+   САЙТЫ ДЛЯ ПОДГОТОВКИ К ЭКЗАМЕНАМ (отдельный список, формат такой же).
+   ============================================================ */
+const SITES = [
+  {
+    href: 'https://ruslankutsov.github.io/phys_oge/',
+    icon: `<rect x="1.5" y="1.5" width="61" height="61" rx="13" fill="#fbfcfe" stroke="#d3d9e8" stroke-width="2"/><text x="32" y="34" text-anchor="middle" font-family="system-ui,sans-serif" font-size="19" font-weight="700" fill="#1b2a55">ОГЭ</text><text x="32" y="50" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#2b9a63">физика</text>`,
+    ru: { title: 'Задачи ОГЭ по физике', text: 'Сайт с задачами для подготовки к ОГЭ по физике.' },
+    en: { title: 'Physics OGE problems', text: 'Problems for preparing for the OGE (Grade 9 state exam) in physics.' }
+  },
+  {
+    href: 'https://ruslankutsov.github.io/phys_ege/',
+    icon: `<rect x="1.5" y="1.5" width="61" height="61" rx="13" fill="#fbfcfe" stroke="#d3d9e8" stroke-width="2"/><text x="32" y="34" text-anchor="middle" font-family="system-ui,sans-serif" font-size="19" font-weight="700" fill="#1b2a55">ЕГЭ</text><text x="32" y="50" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#2b9a63">физика</text>`,
+    ru: { title: 'Задачи ЕГЭ по физике', text: 'Сайт с задачами для подготовки к ЕГЭ по физике.' },
+    en: { title: 'Physics EGE problems', text: 'Problems for preparing for the EGE (Grade 11 state exam) in physics.' }
+  },
+  {
+    href: 'https://ruslankutsov.github.io/math_ege/',
+    icon: `<rect x="1.5" y="1.5" width="61" height="61" rx="13" fill="#fbfcfe" stroke="#d3d9e8" stroke-width="2"/><text x="32" y="34" text-anchor="middle" font-family="system-ui,sans-serif" font-size="19" font-weight="700" fill="#1b2a55">ЕГЭ</text><text x="32" y="50" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#2b9a63">матем.</text>`,
+    ru: { title: 'Задачи ЕГЭ по математике', text: 'Сайт с задачами для подготовки к ЕГЭ по математике.' },
+    en: { title: 'Math EGE problems', text: 'Problems for preparing for the EGE (Grade 11 state exam) in mathematics.' }
+  },
+  {
+    href: 'https://ruslankutsov.github.io/phys_together/',
+    icon: `<rect x="1.5" y="1.5" width="61" height="61" rx="13" fill="#fbfcfe" stroke="#d3d9e8" stroke-width="2"/><g fill="none" stroke="#1b2a55" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"><path d="M10 14H38V32H22L14 39V32H10Z"/><path d="M30 38H54V54H50V61L42 54H30Z" fill="#2b9a63" fill-opacity=".25" stroke="#2b9a63"/></g>`,
+    ru: { title: 'Давайте решать задачи по физике вместе!', text: 'Задачи повышенного уровня сложности с подсказками и указаниями.' },
+    en: { title: "Let's solve physics problems together!", text: 'Advanced-level problems with hints and guidance.' }
+  }
+];
+
+const UI = {
+  ru: { eyebrow: 'Математика и физика', h1: 'Тренажёры и подготовка к экзаменам', lead: 'Интерактивные тренажёры по математике и сайты с задачами для подготовки к ОГЭ и ЕГЭ.', h_tr: 'Тренажёры', h_ex: 'Подготовка к экзаменам', open: 'Открыть →', c_name: 'Руслан Владимирович Куцов', c_vk: 'ВКонтакте', c_profi: 'Профи.ру' },
+  en: { eyebrow: 'Math and physics', h1: 'Trainers and exam preparation', lead: 'Interactive math trainers and problem sites for preparing for the OGE and EGE exams.', h_tr: 'Trainers', h_ex: 'Exam preparation', open: 'Open →', c_name: 'Ruslan Kutsov, PhD', c_vk: 'VK', c_profi: 'Profi.ru' }
+};
+let lang = 'ru';
+try { lang = localStorage.getItem('trainers.lang') === 'en' ? 'en' : 'ru'; } catch (e) { }
+function render() {
+  const d = UI[lang];
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(e => { e.textContent = d[e.getAttribute('data-i18n')]; });
+  document.getElementById('lang-ru').setAttribute('aria-pressed', lang === 'ru');
+  document.getElementById('lang-en').setAttribute('aria-pressed', lang === 'en');
+  const cards = L => L.map(t =>
+    '<a class="card" href="' + t.href + '"><svg class="ico" viewBox="0 0 64 64" aria-hidden="true">' + t.icon + '</svg>' +
+    '<div><h2>' + t[lang].title + '</h2><p>' + t[lang].text + '</p></div></a>').join('');
+  document.getElementById('grid').innerHTML = cards(TRAINERS);
+  document.getElementById('grid2').innerHTML = cards(SITES);
+}
+function setLang(l) { lang = l; try { localStorage.setItem('trainers.lang', l); } catch (e) { } render(); }
+document.getElementById('lang-ru').addEventListener('click', () => setLang('ru'));
+document.getElementById('lang-en').addEventListener('click', () => setLang('en'));
+render();
+</script>
+</body>
+</html>
